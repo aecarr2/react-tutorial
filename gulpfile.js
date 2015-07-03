@@ -38,3 +38,13 @@ gulp.task('build', function(){
     .pipe(uglify(path.MINIFIED_OUT))
     .pipe(gulp.dest(path.DEST_BUILD));
 });
+
+gulp.task('replaceHTML', function(){
+  gulp.src(path.HTML)
+    .pipe(htmlreplace({
+      'js': 'build/' + path.MINIFIED_OUT
+    }))
+    .pipe(gulp.dest(path.DEST));
+});
+
+gulp.task('production', ['replaceHTML', 'build']);
